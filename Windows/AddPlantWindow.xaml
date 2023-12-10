@@ -20,9 +20,23 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="1" Grid.Column="2" Text="Add a plant" HorizontalAlignment="Center" FontSize="30" />
         <Button Grid.Column="3" Grid.Row="5" Width="70" VerticalAlignment="Bottom" Content="Go back" Click="Button_Click"/>
+
+        <ListView Name="lstPlantInstructions" Grid.Row="2" Grid.Column="2" Grid.RowSpan="3"/>
+        
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Plant name:" HorizontalAlignment="Center" FontSize="30" />
+        <TextBox Name="txtPlantName" Grid.Row="3" Grid.Column="1" Width="200" Height="50"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="Instructions:" HorizontalAlignment="Center" FontSize="30" />
+        <TextBox Name="txtInstructions" Grid.Row="5" Grid.Column="1" Width="200" Height="50"/>
+        <Button Name ="btnAddInstruction" Content="Add Instruction" Grid.Row="5" Grid.Column="2" Width="200" Height="50" Click="btnAddInstruction_Click"/>
+        <Button Name ="btnAddPlant" Content="Add Plant" Grid.Row="3" Grid.Column="3" Width="200" Height="50" Click="btnAddPlant_Click" />
+        <Button Content="Info" Grid.Row="1" Grid.Column="3" Width="80" Height="50" Click="Button_Click_1"/>
+
+
+
     </Grid>
 </Window>

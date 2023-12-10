@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,37 @@ namespace GreenThumb2.Windows
             PlantWindow plantWindow = new();
             plantWindow.Show();
             Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Start by adding the desired instructions to the list in the middle by pressing Add Instruction and when you're done simply press \"Add Plant\"", "Adding information");
+        }
+
+        private void btnAddPlant_Click(object sender, RoutedEventArgs e)
+        {
+            string plantname = txtPlantName.Text;
+            if (string.IsNullOrWhiteSpace(plantname))
+            {
+                MessageBox.Show("You have to enter a plant name");
+            }
+            else
+            {
+
+            }
+        }
+
+        private void btnAddInstruction_Click(object sender, RoutedEventArgs e)
+        {
+            string instructions = txtInstructions.Text;
+            if (string.IsNullOrWhiteSpace(instructions))
+            {
+                MessageBox.Show("You have not entered any instructions");
+            }
+            else
+            {
+
+            }
         }
     }
 }
