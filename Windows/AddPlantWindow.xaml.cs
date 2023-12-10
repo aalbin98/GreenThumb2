@@ -1,4 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using GreenThumb2.Database;
+using GreenThumb2.Models;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,11 +45,22 @@ namespace GreenThumb2.Windows
             string plantname = txtPlantName.Text;
             if (string.IsNullOrWhiteSpace(plantname))
             {
-                MessageBox.Show("You have to enter a plant name");
+                MessageBox.Show("You have to enter a plant name","Error");
             }
             else
             {
+                using (GreenThumb2DbContext context = new())
+                {
+                    PlantModel newPlant = new()
+                    {
+                        PlantName = plantname,
+                    };
 
+                    context.Plants.Add(newPlant);
+                    context.SaveChanges();
+
+                    MessageBox.Show("Plant added");
+                }
             }
         }
 
@@ -56,11 +69,14 @@ namespace GreenThumb2.Windows
             string instructions = txtInstructions.Text;
             if (string.IsNullOrWhiteSpace(instructions))
             {
-                MessageBox.Show("You have not entered any instructions");
+                MessageBox.Show("You have not entered any instructions", "Error");
             }
             else
             {
+                using (GreenThumb2DbContext context = new())
+                {
 
+                }
             }
         }
     }
