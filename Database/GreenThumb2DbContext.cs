@@ -19,5 +19,13 @@ namespace GreenThumb2.Database
 
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=GreenThumb2;Trusted_Connection=True;");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+        }
     }
+
+    
+    
 }

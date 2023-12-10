@@ -22,6 +22,14 @@ namespace GreenThumb2.Windows
         public AddPlantWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PlantWindow plantWindow = new();
+            plantWindow.Show();
+            Close();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using GreenThumb2.Windows;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,14 @@ namespace GreenThumb2
         public MainWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
+
+        private void openPlantWindow_Click(object sender, RoutedEventArgs e)
+        {
+            PlantWindow plantwindow = new();
+            plantwindow.Show();
+            Close();
         }
     }
 }
