@@ -23,9 +23,21 @@ namespace GreenThumb2.Database
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<PlantModel>()
+                .HasData(
+                new PlantModel()
+                {
+                    PlantId = 1,
+                    PlantName = "Rose"
+                });
+            modelBuilder.Entity<InstructionModel>()
+                .HasData(
+                new InstructionModel()
+                {
+                    InstructionId = 1,
+                    Instruction = "Water frequently",
+                    PlantId = 1
+                });
         }
     }
-
-    
-    
 }

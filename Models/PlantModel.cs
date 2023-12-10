@@ -13,7 +13,7 @@ namespace GreenThumb2.Models
         public int PlantId { get; set; }
         public string PlantName { get; set; } = null!;
 
-        public List<InstructionModel> Instructions { get; set; }
+        public List<InstructionModel> Instructions { get; set; } = new();
 
     }
 }

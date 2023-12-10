@@ -1,5 +1,7 @@
-﻿using System;
+﻿using GreenThumb2.Database;
+using System;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,23 @@ namespace GreenThumb2.Windows
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+
+            using (GreenThumb2DbContext context = new())
+            {
+                PlantRepository plantrepository = new(context);
+
+                var plants = plantrepository.GetAll();
+
+                foreach ( var plant in plants ) 
+                {
+                    ListViewItem item = new();
+                    item.Tag = plant;
+                    item.Content = plant.PlantName;
+
+                    lstPlants.Items.Add(item);
+                }
+            }
         }
 
         private void btnAddPlant_Click(object sender, RoutedEventArgs e)
