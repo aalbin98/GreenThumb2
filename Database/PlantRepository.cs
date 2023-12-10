@@ -20,9 +20,19 @@ namespace GreenThumb2.Database
             return _context.Plants.ToList();
         }
 
+        public PlantModel? GetById(int id)
+        {
+            return _context.Plants.FirstOrDefault(p => p.PlantId == id);
+        
+        }
+
         public void Delete(int id)
         {
 
+        }
+        public List<InstructionModel> GetInstructionsById(int plantId)
+        {
+            return _context.Instructions.Where(i => i.PlantId == plantId).ToList();
         }
     }
 }

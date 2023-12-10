@@ -1,5 +1,7 @@
-﻿using System;
+﻿using GreenThumb2.Database;
+using System;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,24 @@ namespace GreenThumb2.Windows
     /// </summary>
     public partial class PlantDetailsWindow : Window
     {
-        public PlantDetailsWindow()
+        public PlantDetailsWindow(int id)
         {
             InitializeComponent();
+
+            using (GreenThumb2DbContext context = new())
+            {
+                PlantRepository plantrepository = new(context);
+
+                var plant = plantrepository.GetById(id);
+                var instructions = plantrepository.GetInstructionsById(id);
+
+                if (plant != null) 
+                {
+                    plantName.Content = plant.PlantName;
+                    plantDescription.ItemsSource = instructions;
+                }
+            }
         }
+
     }
 }

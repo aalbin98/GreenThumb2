@@ -7,6 +7,33 @@
         mc:Ignorable="d"
         Title="PlantDetailsWindow" Height="450" Width="800" Background="MediumSlateBlue">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="Plant Details" HorizontalAlignment="Center" FontSize="30" />
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Plant name:" HorizontalAlignment="Center" FontSize="30" />
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Plant instructions:" HorizontalAlignment="Center" FontSize="30" />
+
+        <Label Name="plantName" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" FontSize="25"/>
+        <ListView Name="plantDescription" Grid.Column="2" Grid.Row="3" FontSize="25" Width="500" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Instruction}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using GreenThumb2.Database;
+using GreenThumb2.Models;
 using System;
 using System.Collections.Generic;
 using System.IO.Pipes;
@@ -49,6 +50,24 @@ namespace GreenThumb2.Windows
             AddPlantWindow addPlantWindow = new();
             addPlantWindow.Show();
             Close();
+        }
+
+        private void btnDetails_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewItem selectedItem = (ListViewItem)lstPlants.SelectedItem;
+
+            if(selectedItem != null ) 
+            {
+                PlantModel selectedPlant = (PlantModel)selectedItem.Tag;
+                int selectedPlantId = selectedPlant.PlantId;
+
+                PlantDetailsWindow detailsWindow = new(selectedPlantId);
+                detailsWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select a plant to show details.");
+            }
         }
     }
 }

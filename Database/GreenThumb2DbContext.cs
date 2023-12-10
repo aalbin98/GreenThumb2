@@ -37,7 +37,15 @@ namespace GreenThumb2.Database
                     InstructionId = 1,
                     Instruction = "Water frequently",
                     PlantId = 1
+                },
+                new InstructionModel()
+                {
+                    InstructionId = 2,
+                    Instruction = "Beware of the pointy thorns ",
+                    PlantId = 1
                 });
+
+
         }
     }
 }
