@@ -22,6 +22,8 @@ namespace GreenThumb2.Windows
     /// </summary>
     public partial class AddPlantWindow : Window
     {
+
+        public List<string> listOfPlantInstrucitons = new List<string>();
         public AddPlantWindow()
         {
             InitializeComponent();
@@ -51,15 +53,22 @@ namespace GreenThumb2.Windows
             {
                 using (GreenThumb2DbContext context = new())
                 {
-                    PlantModel newPlant = new()
+                    PlantModel newPlant = new PlantModel
                     {
                         PlantName = plantname,
+                        Instructions = listOfPlantInstrucitons.Select(i => new InstructionModel { Instruction = i }).ToList()
                     };
 
                     context.Plants.Add(newPlant);
                     context.SaveChanges();
 
-                    MessageBox.Show("Plant added");
+                    MessageBox.Show("Plant and instructions added");
+
+
+                    txtPlantName.Clear();
+                    listOfPlantInstrucitons.Clear();
+                    UpdateListViewUi();
+
                 }
             }
         }
@@ -73,10 +82,21 @@ namespace GreenThumb2.Windows
             }
             else
             {
-                using (GreenThumb2DbContext context = new())
-                {
+                listOfPlantInstrucitons.Add(instructions);
+                UpdateListViewUi();
 
-                }
+                txtInstructions.Clear();
+            }
+        }
+
+
+        private void UpdateListViewUi()
+        {
+            lstPlantInstructions.Items.Clear();
+
+            foreach (var instruction in listOfPlantInstrucitons)
+            {
+                lstPlantInstructions.Items.Add(instruction);
             }
         }
     }
