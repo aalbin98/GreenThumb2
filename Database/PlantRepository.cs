@@ -26,9 +26,15 @@ namespace GreenThumb2.Database
         
         }
 
-        public void Delete(int id)
+        public void DeletePlant(int id)
         {
+            PlantModel? plantToDelete = _context.Plants.FirstOrDefault(p => p.PlantId == id);
 
+            if (plantToDelete != null)
+            {
+                _context.Instructions.RemoveRange(plantToDelete.Instructions);
+                _context.Plants.Remove(plantToDelete);
+            }
         }
         public List<InstructionModel> GetInstructionsById(int plantId)
         {

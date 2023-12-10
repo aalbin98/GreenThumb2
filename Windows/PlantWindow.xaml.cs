@@ -69,5 +69,49 @@ namespace GreenThumb2.Windows
                 MessageBox.Show("Please select a plant to show details.");
             }
         }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstPlants.SelectedItem == null)
+            {
+                MessageBox.Show("You need to select a plant to delete");
+            }
+            else
+            {
+                ListViewItem selecteditem = (ListViewItem)lstPlants.SelectedItem;
+                PlantModel selectedPlant =  (PlantModel)selecteditem.Tag;
+
+                using (GreenThumb2DbContext context = new())
+                {
+                    PlantRepository plantRepository = new PlantRepository(context);
+                    plantRepository.DeletePlant(selectedPlant.PlantId);
+                    context.SaveChanges();
+                }
+            }
+
+            UpdateUi();
+        }
+        public void UpdateUi()
+        {
+            lstPlants.Items.Clear();
+
+            using (GreenThumb2DbContext context = new())
+            {
+                PlantRepository plantrepository = new(context);
+
+                var plants = plantrepository.GetAll();
+
+                foreach (var plant in plants)
+                {
+                    ListViewItem item = new();
+                    item.Tag = plant;
+                    item.Content = plant.PlantName;
+
+                    lstPlants.Items.Add(item);
+                }
+            }
+
+        }
     }
+
 }
