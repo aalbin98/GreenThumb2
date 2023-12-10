@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO.Pipes;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,7 +35,7 @@ namespace GreenThumb2.Windows
 
                 var plants = plantrepository.GetAll();
 
-                foreach ( var plant in plants ) 
+                foreach (var plant in plants)
                 {
                     ListViewItem item = new();
                     item.Tag = plant;
@@ -56,7 +57,7 @@ namespace GreenThumb2.Windows
         {
             ListViewItem selectedItem = (ListViewItem)lstPlants.SelectedItem;
 
-            if(selectedItem != null ) 
+            if (selectedItem != null)
             {
                 PlantModel selectedPlant = (PlantModel)selectedItem.Tag;
                 int selectedPlantId = selectedPlant.PlantId;
@@ -79,7 +80,7 @@ namespace GreenThumb2.Windows
             else
             {
                 ListViewItem selecteditem = (ListViewItem)lstPlants.SelectedItem;
-                PlantModel selectedPlant =  (PlantModel)selecteditem.Tag;
+                PlantModel selectedPlant = (PlantModel)selecteditem.Tag;
 
                 using (GreenThumb2DbContext context = new())
                 {
@@ -112,6 +113,32 @@ namespace GreenThumb2.Windows
             }
 
         }
-    }
 
+        private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = searchTextBox.Text.Trim();
+
+            lstPlants.Items.Clear();
+
+            using (GreenThumb2DbContext context = new GreenThumb2DbContext())
+            {
+                PlantRepository plantRepository = new PlantRepository(context);
+
+                var plants = plantRepository.GetAll();
+
+                foreach (var plant in plants)
+                {
+                    if (plant.PlantName.ToLower().StartsWith(searchText))
+                    {
+                        ListViewItem item = new ListViewItem();
+                        item.Tag = plant;
+                        item.Content = plant.PlantName;
+
+                        lstPlants.Items.Add(item);
+                    }
+                }
+            }
+        }
+
+    }
 }
